@@ -1,0 +1,14 @@
+{
+  "name": "openlayerzzy",
+  "version": "1.0.13",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
