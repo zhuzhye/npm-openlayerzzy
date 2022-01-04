@@ -5,7 +5,7 @@ import styleStroke from "ol/style/Stroke"; //添加填充样式
 import Polygon from "ol/geom/Polygon"; //面
 import { transform } from "ol/proj"; //坐标系转换
 import styleIcon from "ol/style/Icon"; //添加图标
-import kuang from  "./image/kuang.png"
+import kuang from "./image/kuang.png"
 const ShipStyle = new Object({})
 ShipStyle.ShipStyle = function (f, r) {
     let changeCoor = coor => transform(coor, "EPSG:4326", "EPSG:3857");
@@ -20,6 +20,10 @@ ShipStyle.ShipStyle = function (f, r) {
     let lon = parseFloat(f.get("lon"));
     let lat = parseFloat(f.get("lat"));
     let shipType = f.get('shipType')
+    let show = f.get("show")
+    if (!show) {
+        return
+    }
     //判断图层级别
     if (r < 13) {
         style = new Style({

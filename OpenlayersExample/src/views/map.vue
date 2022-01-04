@@ -25,12 +25,13 @@
     <Information
       :shipMes.sync="shipMes"
       :isShow.sync="shipMesShow"
+      :historydata.sync="historydata"
       v-bind="{ map, MapApi }"
     ></Information>
   </div>
 </template>
 <script>
-import MapApi from "openlayerzzy/methods/index";
+import MapApi from "../../../openlayerzzy/methods/index";
 import SmallMap from "../components/smallmap.vue";
 import Collpase from "../components/collapse.vue";
 import Information from "../components/imformation.vue";
@@ -52,6 +53,7 @@ export default {
       drawer: false, //菜单抽屉
       shipMesShow: false, //船舶信息
       shipMes: {}, //船舶信息
+      historydata: [], //历史轨迹点
     };
   },
   methods: {
@@ -65,8 +67,8 @@ export default {
     },
     //添加鼠标移入事件
     Customelement(f, value) {
-      // return "时间：" + f.get("time") + "<br/>";
-      return "";
+      return "时间：" + f.get("time") + "<br/>";
+      // return "";
     },
   },
   mounted() {
@@ -81,8 +83,12 @@ export default {
     //关闭弹框时注意清理选择框和选中图层船舶
     shipMesShow(newval) {
       if (!newval) {
-         this.MapApi.GetLayersById(this.map, "ShipFindLayer").getSource().clear();
-         this.MapApi.GetLayersById(this.map, "ShipSelectKuang").getSource().clear();
+        this.MapApi.GetLayersById(this.map, "ShipFindLayer")
+          .getSource()
+          .clear();
+        this.MapApi.GetLayersById(this.map, "ShipSelectKuang")
+          .getSource()
+          .clear();
       }
     },
   },

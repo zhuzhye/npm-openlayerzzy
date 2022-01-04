@@ -297,13 +297,14 @@ export default {
           })
           .then((res) => {
             if (res.data.code == 200) {
+              console.log(res)
               res.data.result.forEach((item) => {
-                item.lonStr = this.MapApi.CacuLonLat(
+                item.lonStr = that.MapApi.CacuLonLat(
                   item.lon / 60 / 10000,
                   "lon",
                   "String"
                 );
-                item.latStr = this.MapApi.CacuLonLat(
+                item.latStr = that.MapApi.CacuLonLat(
                   item.lat / 60 / 10000,
                   "lat",
                   "String"
@@ -313,7 +314,7 @@ export default {
               that.$refs.historyinformation.loading = false;
               let zoom = that.map.getView().getZoom();
               that.$nextTick(() => {
-                this.MapApi.VariationHistory(zoom, that.historyroute);
+                that.MapApi.VariationHistory(zoom, that.historyroute);
               });
             }
           });

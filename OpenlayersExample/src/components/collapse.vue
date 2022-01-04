@@ -70,6 +70,16 @@
             {{ !isfocusship ? "添加关注船舶" : "移除关注船舶" }}
           </span>
         </el-button>
+        <el-tree
+          v-if="isgroupship"
+          show-checkbox
+          :data="$store.state.ships"
+          :default-checked-keys="$store.getters.shipsId"
+          :props="defaultProps"
+          node-key="id"
+          @check-change="checkchange"
+          ref="shiptree"
+        ></el-tree>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -92,13 +102,25 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      defaultProps: {
+        children: "children",
+        label: "name",
+      },
+    };
   },
   methods: {
     handleChange(e) {
       if (this[e.target.id]) {
         this[e.target.id]();
       }
+    },
+    checkchange(data, checktype) {
+      console.log(data, checktype);
+      let layer = this.MapApi.GetLayersById(this.map, "ShipGroupLayer");
+      let f = layer.getSource().getFeatureById(data.id);
+      f && f.set("show", checktype);
+      console.log(f);
     },
   },
 };

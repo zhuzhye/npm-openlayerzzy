@@ -18,7 +18,7 @@ module.exports = {
             const namepath = req.path.split("/")
             const name = namepath[namepath.length - 1]
             const tail = req.path.split(".")
-            const tailname = tail[tail.length]
+            const tailname = tail[tail.length-1]
             if (tailname == "json") {
               return
             }
